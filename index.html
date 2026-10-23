@@ -5,19 +5,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cabin In The Wire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=VT323&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/global/styles/root.css">
+    <link rel="stylesheet" href="/global/styles/starting-point.css">
 </head>
 
-<body>
-    <h1>Cabin In The Wire</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum voluptatem consectetur quasi magnam fugit ut facere
-        doloribus vitae quia incidunt, vero voluptas dolorem cum labore. Dolor nemo repudiandae eaque ex maiores
-        laboriosam consectetur consequuntur, aliquam ipsa id incidunt, minus dolore tempore enim esse quo. Magnam
-        officia ad fugiat natus assumenda.</p>
-    
+<div class="world">
+    <div class="bg bg-gradient"></div>
+    <div class="bg zone-forest"></div>
+    <div class="bg ground-line"></div>
+    <div class="bg zone-circuit"></div>
+
+    <div class="zone-line" style="top:200px">400 · ground</div>
+    <div class="zone-line" style="top:800px">800 · topsoil</div>
+    <div class="zone-line" style="top:1200px">1200 · roots</div>
+    <div class="zone-line" style="top:1600px">1600 · circuitry</div>
+
+    <header class="hero">
+        <h1>Cabin in the Wires</h1>
+        <p class="tagline">welcome in. kettle's on.</p>
+
+        <picture>
+            <source srcset="cabin.png" media="(prefers-reduced-motion: reduce)">
+            <img class="cabin" src="/global/assets/cabin.gif"
+                alt="A small log cabin with a mossy roof, a glowing window, and an antenna" width="128" height="128">
+        </picture>
+        <div class="marquee" aria-hidden="true"><span>new: still planting the garden <span class="blink">*</span> leave
+                a note by the door <span class="blink">*</span> hand crafted and artisanal</span></div>
+    </header>
+
+    <div class="layout">
+        <aside>
+            <section class="panel">
+                <div class="panel-title">[ paths ]</div>
+                <div class="panel-body">
+                    <nav aria-label="Main">
+                        <ul>
+                            <li><a href="#">home</a></li>
+                            <li><a href="#">blog</a></li>
+                            <li><a href="#">garden</a></li>
+                            <li><a href="#">about</a></li>
+                            <li><a href="#">links</a></li>
+                            <li><a href="#">guestbook</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-title">[ mushroom ]</div>
+                <div class="panel-body">
+                    <pre aria-hidden="true">   .-"""-.
+ /* * * *\
+:_.-:`:-._;
+    (_)
+ \|/(_)\|/</pre>
+                </div>
+            </section>
+            <section class="panel">
+                <div class="panel-title">[ visitors ]</div>
+                <div class="panel-body">
+                    <div class="counter" aria-label="Visitor count">000421</div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-title">[ badges ]</div>
+                <div class="panel-body">
+                    <span class="btn88">88x31</span><span class="btn88">webring</span><span class="btn88">no
+                        trackers</span>
+                </div>
+            </section>
+        </aside>
+
+        <main>
+            <article class="panel">
+                <div class="panel-title">[ latest post ]</div>
+                <div class="panel-body">
+                    <h2>Why TCP/IP beat OSI</h2>
+                    <p class="date">2026-10-22 <span class="tag">networking</span><span class="tag">history</span></p>
+                    <p>Placeholder text so you can judge how the reading panel sits over the world behind it. Panels are
+                        opaque on purpose: the forest and the soil can be as loud as they like out here, while the words
+                        stay calm in here.</p>
+                    <p>If the text ever feels hard to read against the background, make the panel more opaque or darken
+                        the zone behind it, instead of changing the text.</p>
+                </div>
+            </article>
+
+            <article class="panel">
+                <div class="panel-title">[ garden map ]</div>
+                <div class="panel-body">
+                    <p><span class="tag">seedling</span> <a href="#">anycast notes</a></p>
+                    <p><span class="tag">sprout</span> <a href="#">bgp path selection</a></p>
+                    <p><span class="tag">evergreen</span> <a href="#">mqtt from scratch</a></p>
+                </div>
+            </article>
+
+            <article class="panel">
+                <div class="panel-title">[ older post ]</div>
+                <div class="panel-body">
+                    <h2>Filler to push the scroll</h2>
+                    <p class="date">2026-09-03 <span class="tag">meta</span></p>
+                    <p>Scroll down through the ground, topsoil, and roots to reach the circuit stand-in at 1600px. Press
+                        the zone-lines toggle in the corner to see where each boundary falls.</p>
+                    <p>The quick brown fox jumps over the lazy dog, and then jumps again, so this paragraph is long
+                        enough to make the panel feel like a real post when you view it at a normal reading width on a
+                        laptop screen.</p>
+                </div>
+            </article>
+
+            <article class="panel">
+                <div class="panel-title">[ guestbook ]</div>
+                <div class="panel-body">
+                    <p>leave a note by the door.</p>
+                </div>
+            </article>
+
+            <article class="panel">
+                <div class="panel-title">[ more filler ]</div>
+                <div class="panel-body">
+                    <p>Another panel to extend the page into the root zone. Roots and amber threads should be visible
+                        behind and beside the content here, and the page should get darker as you go.</p>
+                    <p>Add or remove panels until the page height matches the real pages you expect to have.</p>
+                </div>
+            </article>
+        </main>
+    </div>
+
     <footer>
-        <p>&copy; 2026 - Jacob Blomquist</p>
+        <pre aria-hidden="true">   ( ) ~ / \ ( ~ ) / \ ~ ( ) / \ ~
+    \ / ~ ( ) \ / ~ ( ) \ / ~ ( ) ~
+     ( ~ )-----+-----+--------+----
+                |     |        |
+                +-----+---[]---+----</pre>
+        <p>grown by hand. no trackers, no cookies.</p>
     </footer>
+</div>
+
+<div class="scanlines" aria-hidden="true"></div>
+
+<div class="debugbar">
+    <label><input type="checkbox" id="dbg"> zone lines</label>
+    <label><input type="checkbox" id="scan"> scanlines</label>
+</div>
+
+<script>
+    document.getElementById('dbg').addEventListener('change', e => document.body.classList.toggle('debug', e.target.checked));
+    document.getElementById('scan').addEventListener('change', e => document.body.classList.toggle('scan', e.target.checked));
+</script>
 </body>
 
 </html>

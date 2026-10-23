@@ -1,0 +1,404 @@
+/* ===== ASSET FILES (put these next to index.html) =====
+   forest-backdrop.png   256x112 seamless tile
+   ground-line-strip.png 256x112 seamless strip
+   cabin.gif             ~128x128 animated  (cabin.png = static fallback)
+   ====================================================== */
+:root {
+    --void: #070b08;
+    --canopy: #0d1a12;
+    --moss: #14261a;
+    --panel: #101c14;
+    --soil: #2b1d12;
+    --deep-soil: #1a110a;
+    --fern: #3f7a4a;
+    --trace: #2e4a35;
+    --root: #6b4a2b;
+    --text: #d8e4cf;
+    --text-dim: #8fb58a;
+    --amber: #ffb000;
+    --amber-dim: #c77d00;
+    --ember: #ff7a1a;
+    --font-body: "IBM Plex Mono", "Courier New", ui-monospace, monospace;
+    --font-display: "VT323", "IBM Plex Mono", ui-monospace, monospace;
+    --border: 2px solid var(--fern);
+    --shadow: 4px 4px 0 var(--void);
+    --glow: 0 0 8px rgba(255, 176, 0, 0.45);
+
+    /* TUNE THESE */
+    --s: 2;
+    /* pixel scale for all art */
+    --ground-y: 400px;
+    /* where the surface sits */
+    --surface-row: 28px;
+    /* source rows of headroom above the grass line in ground-line-strip.png */
+    --cabin-nudge: 0px;
+    /* positive = push cabin down into the grass */
+    --forest-opacity: 0.7;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--void);
+}
+
+body {
+    margin: 0;
+    font: 16px/1.6 var(--font-body);
+    color: var(--text);
+    image-rendering: pixelated;
+}
+
+a {
+    color: var(--amber);
+}
+
+a:visited {
+    color: var(--amber-dim);
+}
+
+a:hover {
+    color: var(--ember);
+    background: var(--void);
+}
+
+:focus-visible {
+    outline: 2px solid var(--ember);
+    outline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+nav,
+.panel-title {
+    font-family: var(--font-display);
+    font-weight: normal;
+    letter-spacing: 0.04em;
+}
+
+h1,
+h2 {
+    color: var(--amber);
+    text-shadow: var(--glow);
+}
+
+pre {
+    margin: 0;
+    font: inherit;
+    line-height: 1.1;
+    white-space: pre;
+    overflow-x: auto;
+    overflow-y: hidden;
+    color: var(--text-dim);
+}
+
+/* ===== THE WORLD (everything scrolls inside this) ===== */
+.world {
+    position: relative;
+    min-height: 2400px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.bg {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    image-rendering: pixelated;
+}
+
+.bg-gradient {
+    top: 0;
+    height: 100%;
+    z-index: 0;
+    background: linear-gradient(to bottom,
+            var(--canopy) 0, var(--moss) var(--ground-y),
+            var(--soil) calc(var(--ground-y) + 160px),
+            var(--deep-soil) 1200px, var(--void) 1700px, var(--void) 100%);
+}
+
+.zone-forest {
+    top: 0;
+    height: calc(var(--ground-y) - 35px);
+    z-index: 1;
+    opacity: var(--forest-opacity);
+    background:
+        url("/global/assets/treeline.png") repeat 40px 0 / calc(192px * var(--s)) calc(84px * var(--s)),
+        url("/global/assets/treeline.png") repeat 0 0 / calc(256px * var(--s)) calc(112px * var(--s));
+}
+
+.ground-line {
+    top: calc(var(--ground-y) - var(--surface-row) * var(--s) - 90px);
+    z-index: 2;
+    height: calc(112px * var(--s));
+    background: url("/global/assets/ground-line-strip.png") repeat-x 0 0 / calc(256px * var(--s)) calc(112px * var(--s));
+}
+
+/* Stand-in for the circuit tile until you make one */
+.zone-circuit {
+    top: 1600px;
+    bottom: 0;
+    z-index: 1;
+    background:
+        radial-gradient(circle, var(--amber) 0 2px, transparent 3px) 0 0 / 160px 160px,
+        repeating-linear-gradient(90deg, var(--trace) 0 2px, transparent 2px 32px),
+        repeating-linear-gradient(0deg, var(--trace) 0 2px, transparent 2px 32px);
+    opacity: 0.5;
+}
+
+/* Optional scanlines */
+.scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.5;
+    background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(0, 0, 0, .12) 3px);
+}
+
+body:not(.scan) .scanlines {
+    display: none;
+}
+
+/* ===== HERO (the clearing, ends at the ground line) ===== */
+.hero {
+    position: relative;
+    z-index: 3;
+    height: var(--ground-y);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 0;
+}
+
+.hero h1 {
+    margin: 0.25rem 0 0;
+    font-size: 3.5rem;
+    line-height: 1;
+}
+
+.tagline {
+    margin: 0;
+    color: var(--text-dim);
+}
+
+.vine {
+    margin-top: 0.5rem;
+}
+
+.cabin {
+    position: absolute;
+    left: 1rem;
+    bottom: calc(0px - var(--cabin-nudge));
+    width: calc(128px * var(--s));
+    height: auto;
+    image-rendering: pixelated;
+}
+
+.marquee {
+    position: absolute;
+    right: 1rem;
+    bottom: 1.5rem;
+    width: min(46%, 440px);
+    overflow: hidden;
+    border: var(--border);
+    background: var(--void);
+    white-space: nowrap;
+}
+
+.marquee span {
+    display: inline-block;
+    padding: 0 0.5rem;
+    color: var(--amber);
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    animation: scroll 16s linear infinite;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.blink {
+    animation: blink 1s steps(1) infinite;
+    color: var(--ember);
+}
+
+/* ===== LAYOUT ===== */
+.layout {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 1rem 1rem;
+}
+
+.panel {
+    background: var(--panel);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.panel-title {
+    background: var(--fern);
+    color: var(--void);
+    padding: 0.1rem 0.6rem;
+    text-transform: uppercase;
+}
+
+.panel-body {
+    padding: 1rem;
+}
+
+article .panel-body {
+    max-width: 70ch;
+}
+
+.panel-body p {
+    margin: 0 0 1em;
+}
+
+.panel-body p:last-child {
+    margin-bottom: 0;
+}
+
+.date {
+    color: var(--text-dim);
+}
+
+.tag {
+    display: inline-block;
+    border: 1px solid var(--amber-dim);
+    color: var(--amber);
+    padding: 0 0.4rem;
+    margin-right: 0.3rem;
+    font-size: 0.85rem;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.4rem;
+}
+
+nav li::before {
+    content: "> ";
+    color: var(--text-dim);
+}
+
+.btn88 {
+    display: inline-grid;
+    place-items: center;
+    width: 88px;
+    height: 31px;
+    margin: 0 4px 4px 0;
+    border: 1px solid var(--fern);
+    background: var(--void);
+    color: var(--text-dim);
+    font-size: 0.7rem;
+}
+
+.counter {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--amber);
+    letter-spacing: 0.15em;
+}
+
+footer {
+    position: relative;
+    z-index: 3;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+}
+
+footer pre {
+    color: var(--amber-dim);
+}
+
+footer p {
+    color: var(--text-dim);
+}
+
+/* ===== DEBUG: zone lines (toggle in the bar) ===== */
+.zone-line {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    border-top: 1px dashed var(--ember);
+    color: var(--ember);
+    font-size: 0.75rem;
+    pointer-events: none;
+}
+
+body.debug .zone-line {
+    display: block;
+}
+
+.debugbar {
+    position: fixed;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    z-index: 200;
+    background: var(--void);
+    border: var(--border);
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+}
+
+.debugbar label {
+    margin-right: 0.75rem;
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .vine {
+        display: none;
+    }
+
+    .marquee {
+        width: calc(100% - 2rem);
+        bottom: auto;
+        top: 6.5rem;
+        right: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .blink,
+    .marquee span {
+        animation: none;
+    }
+}
