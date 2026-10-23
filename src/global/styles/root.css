@@ -1,0 +1,7 @@
+:root {
+    --asdf: #ff0011
+}
+
+h1{
+    color: var(--asdf)
+}
